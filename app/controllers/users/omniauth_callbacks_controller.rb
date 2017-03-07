@@ -1,5 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
+    raise
     user = User.find_for_facebook_oauth(request.env['omniauth.auth'])
 
     if user.persisted?
@@ -9,5 +10,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session['devise.facebook_data'] = request.env['omniauth.auth']
       redirect_to new_user_registration_url
     end
+  end
+
+  def twitter
+    raise request.env["omniauth.auth"]
   end
 end
